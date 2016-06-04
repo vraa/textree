@@ -1,0 +1,28 @@
+{
+  "name": "textree",
+  "version": "1.0.0",
+  "description": "Generate text tree of folder structure",
+  "main": "index.js",
+  "scripts": {
+    "dev" : "webpack-dev-server --inline --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vraa/textree.git"
+  },
+  "keywords": [
+    "treet",
+    "text",
+    "folder"
+  ],
+  "author": "Veera",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vraa/textree/issues"
+  },
+  "homepage": "https://github.com/vraa/textree#readme",
+  "devDependencies": {
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
