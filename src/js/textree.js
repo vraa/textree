@@ -43,7 +43,7 @@ function indentation(depth, options) {
 function sortItems(items) {
     let fileSymbolIndex = items.indexOf(FILE_SYMBOL);
     if (fileSymbolIndex != -1) {
-        let itemsWithoutFileSymbol = items.splice(fileSymbolIndex, 1);
+        items.splice(fileSymbolIndex, 1);
         items.push(FILE_SYMBOL);
     }
     return items;
