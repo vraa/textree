@@ -44,6 +44,7 @@ function sortItems(items) {
     let fileSymbolIndex = items.indexOf(FILE_SYMBOL);
     if (fileSymbolIndex != -1) {
         items.splice(fileSymbolIndex, 1);
+        items.sort();
         items.push(FILE_SYMBOL);
     }
     return items;
@@ -62,6 +63,17 @@ function parse(node, depth) {
 
 
         if (key === FILE_SYMBOL) {
+            val.sort(function (a, b) {
+                if (isAFolder(a) && isAFolder(b)) {
+                    return a.localeCompare(b);
+                } else if (isAFolder(a) && !isAFolder(b)) {
+                    return -1;
+                } else if (!isAFolder(a) && isAFolder(b)) {
+                    return 1;
+                } else {
+                    return a.localeCompare(b);
+                }
+            });
             for (j = 0; j < val.length; j++) {
                 let fileName = val[j];
                 let fileIsAFolder = isAFolder(fileName);
