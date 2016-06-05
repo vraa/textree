@@ -8,7 +8,7 @@ const NODE_TYPE = {
 
 const FILE_SYMBOL = '_';
 const NEW_LINE = '\n';
-const INDENT = '..';
+const INDENT = '  ';
 const STARTING_DEPTH = 0;
 
 let flags = {
@@ -33,7 +33,7 @@ function isAFolder(name) {
 function indentation(depth, options) {
     let indent = '';
     let isLastItem = options.isLastItem;
-    for (let i = 1; i <= depth - 1; i++) {
+    for (let i = 1; i <= depth; i++) {
         indent += INDENT;
         indent += ( (isLastItem && i === depth) ? '`' : '|');
     }
