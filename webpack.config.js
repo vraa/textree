@@ -9,5 +9,6 @@ module.exports = {
         path: path.join(PROJECT_DIR, 'resources', 'js'),
         filename: 'bundle.js',
         publicPath: '/resources/js'
-    }
+    },
+    devtool: '#source-map'
 };
