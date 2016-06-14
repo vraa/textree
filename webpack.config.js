@@ -10,5 +10,13 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/resources/js'
     },
+    module: {
+        loaders: [
+            {
+                test: /\.scss$/,
+                loaders: ['style', 'css', 'sass']
+            }
+        ]
+    },
     devtool: '#source-map'
 };
