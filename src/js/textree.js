@@ -22,7 +22,8 @@ let Textree = {
 
     textree: function (input, options) {
         Textree._init(input, options);
-        Textree._parse(input, STARTING_DEPTH);
+        Textree.output += Textree._formatName(input.name, ITEM_TYPE.OPEN_FOLDER, true) + NEW_LINE;
+        Textree._parse(input, STARTING_DEPTH + 1);
         return Textree.output;
     },
 
@@ -32,67 +33,55 @@ let Textree = {
         Textree.options = options || DEFAULT_OPTIONS;
     },
 
+    _sanitize: function (str) {
+        return str;
+    },
+
     _parse: function (folder, depth) {
-        let folderContents = Textree._sortFolder(Object.keys(folder));
+        let folderContents = Textree._sortFolder(folder.contents);
         let noOfItemsInFolder = folderContents.length;
-        let i, j;
+        let i;
 
         for (i = 0; i < noOfItemsInFolder; i++) {
 
-            let key = folderContents[i];
-            let val = folder[key];
-
-            if (key === FILE_SYMBOL) {
-                Textree._sortFiles(val);
-                for (j = 0; j < val.length; j++) {
-                    let fileName = val[j];
-                    let fileIsAFolder = Textree._isAFolder(fileName);
-                    let fileType = fileIsAFolder ? ITEM_TYPE.CLOSED_FOLDER : ITEM_TYPE.FILE;
-                    let isLastItem = ((j + 1) === val.length);
-                    let itemIndentation = Textree._indentation(depth, {
-                        isLastItem: isLastItem
-                    });
-
-                    Textree.output += itemIndentation + Textree._formatName(fileName, fileType) + NEW_LINE;
-                }
-
-            } else {
-                let isRootItem = (depth === 0);
-                let itemType = ITEM_TYPE.OPEN_FOLDER;
-                let isLastItem = ((i + 1) === noOfItemsInFolder);
-                let itemIndentation = Textree._indentation(depth, {
-                    isLastItem: isLastItem
-                })
-                Textree.output += itemIndentation + Textree._formatName(key, itemType, isRootItem) + NEW_LINE;
-                Textree._parse(val, depth + 1);
+            let item = folderContents[i];
+            let itemIsAFolder = Textree._isAFolder(item);
+            let folderIsEmpty = itemIsAFolder && (item.contents === undefined || item.contents.length === 0);
+            let itemName = Textree._sanitize(itemIsAFolder ? Textree._folderName(item) : item);
+            let itemType = itemIsAFolder ? (folderIsEmpty ? ITEM_TYPE.CLOSED_FOLDER : ITEM_TYPE.OPEN_FOLDER) : ITEM_TYPE.FILE;
+            let isLastItem = ((i + 1) === noOfItemsInFolder);
+            let itemIndentation = Textree._indentation(depth, {
+                isLastItem: isLastItem
+            });
+            let formattedItemName = Textree._formatName(itemName, itemType);
+            Textree.output += itemIndentation + formattedItemName + NEW_LINE;
+            if (itemIsAFolder && !folderIsEmpty) {
+                Textree._parse(item, depth + 1);
             }
         }
 
     },
 
     _sortFolder: function (contents) {
-        let fileSymbolIndex = contents.indexOf(FILE_SYMBOL);
-        if (fileSymbolIndex != -1) {
-            contents.splice(fileSymbolIndex, 1);
-            contents.sort();
-            contents.push(FILE_SYMBOL);
-        }
-        return contents;
-    },
-
-    _sortFiles: function (files) {
-        let isAFolder = Textree._isAFolder;
-        return files.sort(function (a, b) {
-            if (isAFolder(a) && isAFolder(b)) {
-                return a.localeCompare(b);
-            } else if (isAFolder(a) && !isAFolder(b)) {
-                return -1;
-            } else if (!isAFolder(a) && isAFolder(b)) {
-                return 1;
+        let subFolders = [];
+        let subFiles = [];
+        let noOfItems = contents.length;
+        for (let i = 0; i < noOfItems; i++) {
+            let item = contents[i];
+            if (Textree._isAFolder(item)) {
+                subFolders.push(item);
             } else {
-                return a.localeCompare(b);
+                subFiles.push(item);
             }
+        }
+        subFolders.sort(function (a, b) {
+            return a.name.localeCompare(b.name);
         });
+        subFiles.sort(function (a, b) {
+            return a.localeCompare(b);
+        });
+        return subFolders.concat(subFiles);
+
     },
 
     _formatName: function (name, type, isRoot) {
@@ -105,8 +94,17 @@ let Textree = {
         );
     },
 
-    _isAFolder: function (name) {
-        return name.indexOf('.') === -1;
+    _isAFolder: function (item) {
+        return (typeof item === 'object'
+        || (typeof item === 'string' && item.indexOf('.') === -1));
+    },
+
+    _folderName: function (folder) {
+        if (typeof folder === 'object') {
+            return folder.name;
+        } else if (typeof folder === 'string') {
+            return folder;
+        }
     },
 
     _indentation: function (depth, options) {
@@ -117,7 +115,7 @@ let Textree = {
             indent += ( (isLastItem && i === depth) ? '`' : '|');
         }
         return indent;
-    },
+    }
 
 
 };
