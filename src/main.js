@@ -1,20 +1,47 @@
 'use strict';
 
+require('./scss/main.scss');
+
 let textree = require('./js/textree');
 
 var data = {
-    app: {
-        js: {
-            _: ['main.js'],
-            lib: {
-                _: ['jquery.js']
-            }
+    name: 'app',
+    contents: [
+        {
+            name: 'source files',
+            contents: [
+                'main.js',
+                'helper.js',
+                {
+                    name: 'lib',
+                    contents: [
+                        'jquery.js',
+                        'backbone.js',
+                        {
+                            name: 'newfolder',
+                            contents: [
+                                'new.js'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name: 'ObjectFolder',
+                    contents: [
+                        'hello.js'
+                    ]
+                }
+            ]
         },
-        bar: {
-            _: ['foo.js']
+        {
+            name: 'bar',
+            contents: [
+                'bar.js'
+            ]
         },
-        _: ['package.json', 'index.html']
-    }
+        '.gitignore',
+        'package.json'
+    ]
 };
 
 console.log(textree(data));
