@@ -22,7 +22,7 @@ and you will get the below output (example):
   `--🗎 main.js
 </pre>
 
-By default, it will process the current directory. You can even pass a different folder.
+By default, it will process the current directory. You can also pass a different folder.
 
 ```bash
 textree D:/workspace/textree
@@ -51,7 +51,7 @@ textree D:/workspace/textree
   `--🗎 webpack.config.js
 </pre>
 
-## Gotcha
+## Note
 
 It will not process the following folders, as they tend to be deeper than the *Mariana Trench*.
 
