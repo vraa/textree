@@ -16,6 +16,7 @@ textree
 ```
 and you will get the below output (example):
 
+<pre>
 🗁 src
   |--🗁 js
   |  `--🗎 textree.js
@@ -23,12 +24,14 @@ and you will get the below output (example):
   |  `--🗎 main.scss
   |--🗎 cli.js
   `--🗎 main.js
+</pre>
 
 By default, it will process the current directory. You can even pass a different folder.
 
 ```bash
 textree D:/workspace/textree
 ```
+<pre>
 🗁 textree
   |--🗀 .git
   |--🗀 node_modules
@@ -50,6 +53,7 @@ textree D:/workspace/textree
   |--🗎 README.md
   |--🗎 textree.iml
   `--🗎 webpack.config.js
+</pre>
 
 ## Gotcha
 
