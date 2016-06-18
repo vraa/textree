@@ -2,32 +2,43 @@
 
 const fs = require('fs');
 const path = require('path');
-const EXCLUSION_LIST = ['.git', 'node_modules'];
+const EXCLUSION_LIST = ['.git', 'node_modules', '.sass-cache'];
 let textree = require('./js/textree');
-let folder = __dirname;
-let data = {};
+let DEFAULT_FOLDER = __dirname;
 
-let args = process.argv;
-let params = [];
-
-for (let arg = 0; arg < args.length; arg++) {
-    if (arg > 1) {
-        params.push(args[arg]);
+function _init() {
+    let params = _getCliParams();
+    let folder = _getFolderToWalk(params);
+    let data = _walk(folder, {});
+    if(data) {
+        console.log(textree(data));
     }
+
 }
 
-if (params.length === 0) {
-    usage();
-    process.exit();
+function _getCliParams() {
+    let params = [];
+    let args = process.argv;
+    for (let arg = 0; arg < args.length; arg++) {
+        if (arg > 1) {
+            params.push(args[arg]);
+        }
+    }
+    return params;
 }
 
-let folderToWalk = params[0];
+function _getFolderToWalk(params) {
+    let folder;
+    if (params && params.length > 0) {
+        folder = params[0];
+    }
+    return folder || DEFAULT_FOLDER;
+}
 
-function walk(folder, data) {
+function _walk(folder, data) {
     let folderContents = fs.readdirSync(folder);
     let noOfContents = folderContents.length;
     let folderName = path.basename(folder);
-
 
     data.name = folderName;
     data.contents = [];
@@ -36,13 +47,12 @@ function walk(folder, data) {
         return data;
     }
 
-
     for (let i = 0; i < noOfContents; i++) {
         let content = folderContents[i];
         let contentPath = path.join(folder, content);
         let isFolder = fs.lstatSync(contentPath).isDirectory();
         if (isFolder) {
-            data.contents.push(walk(contentPath, {}));
+            data.contents.push(_walk(contentPath, {}));
         } else {
             data.contents.push(content);
         }
@@ -50,13 +60,7 @@ function walk(folder, data) {
     return data;
 }
 
-function usage() {
-    console.log('Usage');
-}
-
-
-walk(folderToWalk, data);
-console.log(textree(data));
+_init();
 
 
 
