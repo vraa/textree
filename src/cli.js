@@ -11,9 +11,14 @@ let DEFAULT_FOLDER = __dirname;
 function _init() {
     let params = _getCliParams();
     let folder = _getFolderToWalk(params);
-    let data = _walk(folder, {});
-    if(data) {
-        console.log(textree(data));
+    if (fs.lstatSync(folder).isDirectory()) {
+        let data = _walk(folder, {});
+        if (data) {
+            console.log(textree(data));
+        }
+    } else {
+        _usage(folder);
+        process.exit();
     }
 
 }
@@ -60,6 +65,10 @@ function _walk(folder, data) {
         }
     }
     return data;
+}
+
+function _usage(input) {
+    console.log('"' + input + '" is not a directory. Exiting.');
 }
 
 _init();
