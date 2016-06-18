@@ -1,12 +1,12 @@
 {
   "name": "textree",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate text tree of folder structure",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --colors"
   },
-  "bin" : "src/cli.js",
+  "bin": "src/cli.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vraa/textree.git"
