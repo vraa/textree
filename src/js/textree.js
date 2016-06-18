@@ -95,8 +95,7 @@ let Textree = {
     },
 
     _isAFolder: function (item) {
-        return (typeof item === 'object'
-        || (typeof item === 'string' && item.indexOf('.') === -1));
+        return (typeof item === 'object');
     },
 
     _folderName: function (folder) {

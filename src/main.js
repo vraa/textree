@@ -5,42 +5,54 @@ require('./scss/main.scss');
 let textree = require('./js/textree');
 
 var data = {
-    name: 'app',
-    contents: [
+    "name": ".",
+    "contents": [
         {
-            name: 'source files',
-            contents: [
-                'main.js',
-                'helper.js',
+            "name": ".git",
+            "contents": []
+        },
+        ".gitignore",
+        "index.html",
+        "LICENSE",
+        {
+            "name": "node_modules",
+            "contents": []
+        },
+        "npm-debug.log",
+        "package.json",
+        "README.md",
+        {
+            "name": "resources",
+            "contents": [
                 {
-                    name: 'lib',
-                    contents: [
-                        'jquery.js',
-                        'backbone.js',
-                        {
-                            name: 'newfolder',
-                            contents: [
-                                'new.js'
-                            ]
-                        }
-                    ]
-                },
-                {
-                    name: 'ObjectFolder',
-                    contents: [
-                        'hello.js'
+                    "name": "js",
+                    "contents": [
+                        "bundle.js"
                     ]
                 }
             ]
         },
         {
-            name: 'bar',
-            contents: [
-                'bar.js'
+            "name": "src",
+            "contents": [
+                "cli.js",
+                {
+                    "name": "js",
+                    "contents": [
+                        "textree.js"
+                    ]
+                },
+                "main.js",
+                {
+                    "name": "scss",
+                    "contents": [
+                        "main.scss"
+                    ]
+                }
             ]
         },
-        '.gitignore',
-        'package.json'
+        "textree.iml",
+        "webpack.config.js"
     ]
 };
 

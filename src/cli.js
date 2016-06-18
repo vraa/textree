@@ -22,12 +22,8 @@ if (params.length === 0) {
 }
 
 let folderToWalk = params[0];
-console.log(folderToWalk);
-console.log(path.isAbsolute(folderToWalk));
-
 
 function walk(folder, data) {
-    console.log('walking folder', folder);
     let folderContents = fs.readdirSync(folder);
     let noOfContents = folderContents.length;
     let folderName = path.basename(folder);
@@ -59,7 +55,8 @@ function usage() {
 }
 
 
-console.log(textree(walk(folderToWalk, data)));
+walk(folderToWalk, data);
+console.log(textree(data));
 
 
 
