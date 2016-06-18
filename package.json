@@ -4,7 +4,8 @@
   "description": "Generate text tree of folder structure",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --colors"
+    "dev": "webpack-dev-server --inline --colors",
+    "patch-release": "npm version patch && npm publish && git push --follow-tags"
   },
   "bin": {
     "textree": "./src/cli.js"
