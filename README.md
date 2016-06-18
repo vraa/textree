@@ -1,8 +1,3 @@
-
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][downloads-url]
-
-[![NPM][nodei-image]][nodei-url]
-
 ## Install
 
 ```bash
