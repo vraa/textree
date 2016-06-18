@@ -1,7 +1,7 @@
 {
   "name": "textree",
   "version": "0.1.4",
-  "description": "Generate text tree of folder structure",
+  "description": "Generate textual tree representation of given folder.",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --colors",
