@@ -3,6 +3,7 @@
   "version": "0.1.8",
   "description": "Generate textual tree representation of given folder in command line.",
   "main": "index.js",
+  "preferGlobal": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --colors",
     "patch-release": "npm version patch && npm publish && git push --follow-tags"
