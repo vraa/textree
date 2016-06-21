@@ -6,6 +6,7 @@
   "preferGlobal": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --colors",
+    "test": "jasmine-node test",
     "patch-release": "npm version patch && npm publish && git push --follow-tags"
   },
   "bin": {
@@ -28,6 +29,7 @@
   "homepage": "https://github.com/vraa/textree#readme",
   "devDependencies": {
     "css-loader": "^0.23.1",
+    "jasmine-node": "^1.14.5",
     "node-sass": "^3.7.0",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
