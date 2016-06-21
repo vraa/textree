@@ -1,6 +1,6 @@
 {
   "name": "textree",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Generate textual tree representation of given folder in command line.",
   "main": "index.js",
   "preferGlobal": true,
