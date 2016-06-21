@@ -1,3 +1,7 @@
+## Build
+
+[![Build Status](https://travis-ci.org/vraa/textree.svg?branch=master)](https://travis-ci.org/vraa/textree)
+
 ## Install
 
 ```bash
