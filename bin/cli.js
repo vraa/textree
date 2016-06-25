@@ -5,8 +5,8 @@
 const fs = require('fs');
 const path = require('path');
 
-let _walk = require('./js/walk');
-let textree = require('./js/textree');
+let _walk = require('../src/js/walk');
+let textree = require('../src/js/textree');
 let DEFAULT_FOLDER = process.cwd();
 
 function _init() {
