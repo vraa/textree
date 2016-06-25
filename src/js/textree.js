@@ -1,5 +1,22 @@
 'use strict';
 
+/**
+ * 
+ * Required format of input:
+ * 
+ * {
+ *  name: 'folder name',
+ *  contents: [
+ *      {
+ *          name: 'subfolder',
+ *          contents: []
+ *      },
+ *      'file.js'
+ *  ]
+ * }
+ * 
+ */
+
 const ITEM_TYPE = {
     FILE: '🗎',
     OPEN_FOLDER: '🗁',
